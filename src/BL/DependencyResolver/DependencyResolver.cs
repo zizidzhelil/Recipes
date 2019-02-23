@@ -11,6 +11,7 @@ namespace BL.DependencyResolver
         public static ServiceCollection RegisterTypes(this ServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IGetRecipeByNameQueryAsync, GetRecipeByNameQueryAsync>();
+            serviceCollection.AddScoped<IGetRecipeByCategoryQueryAsync, GetRecipeByCategoryQueryAsync>();
 
             serviceCollection.AddScoped<IRecipeService, RecipeService>();
 

@@ -22,24 +22,44 @@ namespace Recipe
             ServiceProvider serviceProvider = new ServiceCollection()
                .RegisterConcreteTypes(configuration)
                .BuildServiceProvider();
-                
+
             Parser.Default.ParseArguments<CliOptions>(args)
                 .WithParsed<CliOptions>(o =>
                 {
-                    var recipeService = serviceProvider.GetService<IRecipeService>();
-                    var result = recipeService.GetRecipesAsync(o.Name).GetAwaiter().GetResult(); 
+                    if (o.Functionality == "Recipes by Category")
+                    {
+                        var recipeByCategoryService = serviceProvider.GetService<IRecipeService>();
+                        var result = recipeByCategoryService.GetRecipesByCategoryAsync(o.Category).GetAwaiter().GetResult();
 
-                    var recipeConverter = serviceProvider.GetService<IDataTableConverter>();
-                    var recipeDataTable = recipeConverter.ConvertRecipeToDataTable(result);                   
+                        var recipeConverter = serviceProvider.GetService<IDataTableConverter>();
+                        var recipeDataTable = recipeConverter.ConvertRecipeToDataTable(result);
 
-                    ConsoleTableBuilder
-                           .From(recipeDataTable)
-                           .WithFormat(ConsoleTableBuilderFormat.MarkDown)
-                           .WithOptions(new ConsoleTableBuilderOption())
-                           .Export();
+                        ConsoleTableBuilder
+                               .From(recipeDataTable)
+                               .WithFormat(ConsoleTableBuilderFormat.MarkDown)
+                               .WithOptions(new ConsoleTableBuilderOption())
+                               .Export();
 
-                    IWriter writer = serviceProvider.GetService<IWriter>();
-                    writer.Write(recipeDataTable);
+                        IWriter writer = serviceProvider.GetService<IWriter>();
+                        writer.Write(recipeDataTable);
+                    }
+                    else if (o.Functionality == "Recipes")
+                    {
+                        var recipeService = serviceProvider.GetService<IRecipeService>();
+                        var result = recipeService.GetRecipesAsync(o.Name).GetAwaiter().GetResult();
+
+                        var recipeConverter = serviceProvider.GetService<IDataTableConverter>();
+                        var recipeDataTable = recipeConverter.ConvertRecipeToDataTable(result);
+
+                        ConsoleTableBuilder
+                               .From(recipeDataTable)
+                               .WithFormat(ConsoleTableBuilderFormat.MarkDown)
+                               .WithOptions(new ConsoleTableBuilderOption())
+                               .Export();
+
+                        IWriter writer = serviceProvider.GetService<IWriter>();
+                        writer.Write(recipeDataTable);
+                    }
                 });
         }
     }

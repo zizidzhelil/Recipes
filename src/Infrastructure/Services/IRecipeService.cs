@@ -7,5 +7,7 @@ namespace Infrastructure.Services
     public interface IRecipeService
     {
         Task<List<RecipeModel>> GetRecipesAsync(string recipeName);
+
+        Task<List<RecipeModel>> GetRecipesByCategoryAsync(string categoryName);
     }
 }
