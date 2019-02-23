@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DAL.Configurations
 {
-    public class CategoryConfig : IEntityTypeConfiguration<Category>
+    public class MeasurementConfig : IEntityTypeConfiguration<Measurement>
     {
-        public void Configure(EntityTypeBuilder<Category> builder)
+        public void Configure(EntityTypeBuilder<Measurement> builder)
         {
             builder.HasKey(x => x.Id);
 
@@ -16,10 +16,6 @@ namespace DAL.Configurations
             builder.Property(s => s.Name)
                 .HasColumnName("name")
                 .HasMaxLength(200);
-
-            builder.HasMany(s => s.Recipes)
-                .WithOne(s => s.Category)
-                .HasForeignKey(s => s.CategoryId);
         }
     }
 }
