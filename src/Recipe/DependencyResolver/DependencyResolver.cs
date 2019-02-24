@@ -17,6 +17,7 @@ namespace Recipe.DependencyResolver
             serviceCollection.AddSingleton<IAppSettingsProvider>(new AppSettingsProvider(configuration));
 
             serviceCollection.AddScoped<IDataTableConverter, DataTableConverter>();
+            serviceCollection.AddScoped<ICategoryNameToDataTableConverter, CategoryNameToDataTableConverter>();
            
             serviceCollection.AddScoped<IWriter, Writer>();
 

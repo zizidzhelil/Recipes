@@ -60,6 +60,23 @@ namespace Recipe
                         IWriter writer = serviceProvider.GetService<IWriter>();
                         writer.Write(recipeDataTable);
                     }
+                    else if (o.Functionality == "Categories")
+                    {
+                        var categoryService = serviceProvider.GetService<ICategoryService>();
+                        var result = categoryService.GetAllCategoryNamesAsync().GetAwaiter().GetResult();
+
+                        var categoryConverter = serviceProvider.GetService<ICategoryNameToDataTableConverter>();
+                        var categoryDataTable = categoryConverter.ConvertCategoryToDataTable(result);
+
+                        ConsoleTableBuilder
+                               .From(categoryDataTable)
+                               .WithFormat(ConsoleTableBuilderFormat.MarkDown)
+                               .WithOptions(new ConsoleTableBuilderOption())
+                               .Export();
+
+                        IWriter writer = serviceProvider.GetService<IWriter>();
+                        writer.Write(categoryDataTable);
+                    }
                 });
         }
     }
