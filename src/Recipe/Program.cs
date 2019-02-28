@@ -7,6 +7,8 @@ using Recipe.Converters;
 using Recipe.DependencyResolver;
 using Recipe.Options;
 using Recipe.Writers;
+using System;
+using System.Linq;
 
 namespace Recipe
 {
@@ -76,6 +78,23 @@ namespace Recipe
 
                         IWriter writer = serviceProvider.GetService<IWriter>();
                         writer.Write(categoryDataTable);
+                    }
+                    else if (o.Functionality == "Recipes by ingredients")
+                    {
+                        var recipeService = serviceProvider.GetService<IRecipeService>();
+                        var result = recipeService.GetRecipesByIngredientsAsync(o.Ingredients.Split(", ", StringSplitOptions.None).ToList()).GetAwaiter().GetResult();
+
+                        var recipeConverter = serviceProvider.GetService<IDataTableConverter>();
+                        var recipeDataTable = recipeConverter.ConvertRecipeToDataTable(result);
+
+                        ConsoleTableBuilder
+                               .From(recipeDataTable)
+                               .WithFormat(ConsoleTableBuilderFormat.MarkDown)
+                               .WithOptions(new ConsoleTableBuilderOption())
+                               .Export();
+
+                        IWriter writer = serviceProvider.GetService<IWriter>();
+                        writer.Write(recipeDataTable);
                     }
                 });
         }

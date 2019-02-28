@@ -4,7 +4,7 @@ namespace Recipe.Options
 {
     public class CliOptions
     {
-        [Option('f', "Functionality", Required = true, HelpText = @"Choose functionality between ""Recipes"", ""Recipes by Category"", ""Categories""")]
+        [Option('f', "Functionality", Required = true, HelpText = @"Choose functionality between ""Recipes"", ""Recipes by Category"", ""Categories"", ""Recipes by ingredients""")]
         public string Functionality { get; set; }
 
         [Option('n', "Name", HelpText = "Recipe name")]
@@ -12,5 +12,8 @@ namespace Recipe.Options
 
         [Option('c', "Category", HelpText = "Category name")]
         public string Category { get; set; }
+
+        [Option('i', "Ingredients", HelpText = "Ingredients")]
+        public string Ingredients { get; set; }
     }
 }

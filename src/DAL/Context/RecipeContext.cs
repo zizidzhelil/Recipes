@@ -132,7 +132,7 @@ namespace DAL.Context
                 {
                     Id = 6,
                     Name = "Chicken, Sausage, Peppers, and Potatoes",
-                    Instructions = "",
+                    Instructions = "Preheat oven to 450 degrees F (230 degrees C).Heat olive oil in a skillet over medium heat.Cook sausage links until browned and oil begins to render, about 3 minutes per side.While sausages are cooking, pierce them lightly here and there with the tip of a sharp knife so some fats and juices are released. Remove from heat and let cool slightly.When sausages are cool enough to handle, cut them into serving pieces,about 2 - inch slices.Transfer back to pan along with any accumulated juices from the cutting board.",
                     Description = "You'll need a large, heavy-duty roasting pan (or a couple of smaller ones) and a very hot oven for this delicious dish. ",
                     CategoryId = 3,
                     NumberOfServings = 10,

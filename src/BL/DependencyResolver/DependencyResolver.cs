@@ -13,6 +13,7 @@ namespace BL.DependencyResolver
             serviceCollection.AddScoped<IGetRecipeByNameQueryAsync, GetRecipeByNameQueryAsync>();
             serviceCollection.AddScoped<IGetRecipeByCategoryQueryAsync, GetRecipeByCategoryQueryAsync>();
             serviceCollection.AddScoped<IGetAllCategoryNamesQueryAsync, GetAllCategoryNamesQueryAsync>();
+            serviceCollection.AddScoped<IGetRecipesByIngredientsQueryAsync, GetRecipesByIngredientsQueryAsync>();
 
             serviceCollection.AddScoped<IRecipeService, RecipeService>();
             serviceCollection.AddScoped<ICategoryService, CategoryService>();

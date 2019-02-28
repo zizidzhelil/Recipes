@@ -12,12 +12,16 @@ namespace BL.Services
     {
         private readonly IGetRecipeByNameQueryAsync _getRecipeByNameQueryAsync;
         private readonly IGetRecipeByCategoryQueryAsync _getRecipeByCategoryQueryAsync;
+        private readonly IGetRecipesByIngredientsQueryAsync _getRecipesByIngredientsQueryAsync;
 
-        public RecipeService(IGetRecipeByNameQueryAsync getRecipeByNameQueryAsync,
-            IGetRecipeByCategoryQueryAsync getRecipeByCategoryQueryAsync)
+        public RecipeService(
+            IGetRecipeByNameQueryAsync getRecipeByNameQueryAsync,
+            IGetRecipeByCategoryQueryAsync getRecipeByCategoryQueryAsync,
+            IGetRecipesByIngredientsQueryAsync getRecipesByIngredientsQueryAsync)
         {
             _getRecipeByNameQueryAsync = getRecipeByNameQueryAsync;
             _getRecipeByCategoryQueryAsync = getRecipeByCategoryQueryAsync;
+            _getRecipesByIngredientsQueryAsync = getRecipesByIngredientsQueryAsync;
         }
 
         public async Task<List<RecipeModel>> GetRecipesAsync(string recipeName)
@@ -29,6 +33,12 @@ namespace BL.Services
         public async Task<List<RecipeModel>> GetRecipesByCategoryAsync(string categoryName)
         {
             List<Recipe> recipes = await _getRecipeByCategoryQueryAsync.ExecuteAsync(categoryName);
+            return recipes.Select(x => new RecipeModel(x)).ToList();
+        }
+
+        public async Task<List<RecipeModel>> GetRecipesByIngredientsAsync(List<string> ingredients)
+        {
+            List<Recipe> recipes = await _getRecipesByIngredientsQueryAsync.ExecuteAsync(ingredients);
             return recipes.Select(x => new RecipeModel(x)).ToList();
         }
     }
