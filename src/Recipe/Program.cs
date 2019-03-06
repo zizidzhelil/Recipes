@@ -96,6 +96,11 @@ namespace Recipe
                         IWriter writer = serviceProvider.GetService<IWriter>();
                         writer.Write(recipeDataTable);
                     }
+                    else if (o.Functionality == "Insert Ingredients")
+                    {
+                        var recipeService = serviceProvider.GetService<IIngredientService>();
+                        recipeService.InsertIngredients(o.Ingredients.Split(", ", StringSplitOptions.None).ToList()).GetAwaiter().GetResult();
+                    }
                 });
         }
     }

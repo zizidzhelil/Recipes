@@ -12,7 +12,7 @@ namespace BL.Services
     {
         private readonly IGetRecipeByNameQueryAsync _getRecipeByNameQueryAsync;
         private readonly IGetRecipeByCategoryQueryAsync _getRecipeByCategoryQueryAsync;
-        private readonly IGetRecipesByIngredientsQueryAsync _getRecipesByIngredientsQueryAsync;
+        private readonly IGetRecipesByIngredientsQueryAsync _getRecipesByIngredientsQueryAsync;     
 
         public RecipeService(
             IGetRecipeByNameQueryAsync getRecipeByNameQueryAsync,
