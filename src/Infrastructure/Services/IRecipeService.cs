@@ -11,5 +11,7 @@ namespace Infrastructure.Services
         Task<List<RecipeModel>> GetRecipesByCategoryAsync(string categoryName);
 
         Task<List<RecipeModel>> GetRecipesByIngredientsAsync(List<string> ingredients);
+
+        Task InsertRecipesAsync(List<RecipeModel> recipesModel);
     }
 }

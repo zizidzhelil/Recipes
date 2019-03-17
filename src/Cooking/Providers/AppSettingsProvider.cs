@@ -2,7 +2,7 @@
 using Infrastructure.Providers;
 using Microsoft.Extensions.Configuration;
 
-namespace Recipe.Providers
+namespace Cooking.Providers
 {
    public class AppSettingsProvider : IAppSettingsProvider
    {

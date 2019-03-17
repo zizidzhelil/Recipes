@@ -16,7 +16,7 @@ namespace BL.Services
 
         public async Task InsertIngredients(List<string> ingredients)
         {
-            await _insertIngredientsCommand.Execute(ingredients);
+            await _insertIngredientsCommand.ExecuteAsync(ingredients);
         }
     }
 }

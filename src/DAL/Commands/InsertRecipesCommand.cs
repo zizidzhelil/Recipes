@@ -7,25 +7,21 @@ using System.Threading.Tasks;
 
 namespace DAL.Commands
 {
-    public class InsertIngredientsCommand : IInsertIngredientsCommand
+    public class InsertRecipesCommand : IInsertRecipesCommand
     {
         private readonly IAppSettingsProvider _appSettingsProvider;
 
-        public InsertIngredientsCommand(IAppSettingsProvider appSettingsProvider)
+        public InsertRecipesCommand(IAppSettingsProvider appSettingsProvider)
         {
             _appSettingsProvider = appSettingsProvider;
         }
 
-        public async Task ExecuteAsync(List<string> ingredients)
+        public async Task ExecuteAsync(List<Recipe> recipes)
         {
             using (RecipeContext context = new RecipeContext(_appSettingsProvider.ConnectionString))
             {
-                foreach (var ingredient in ingredients)
-                {
-                    context.Ingredients.Add(new Ingredient { Name = ingredient });
-                }
-
-                context.SaveChanges();
+                await context.Recipes.AddRangeAsync(recipes);
+                await context.SaveChangesAsync();
             }
         }
     }

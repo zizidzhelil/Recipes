@@ -2,13 +2,15 @@
 using Infrastructure.Providers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Recipe.Converters;
-using Recipe.Converters.Implementation;
-using Recipe.Providers;
-using Recipe.Writers;
-using Recipe.Writers.Implementation;
+using Cooking.Converters;
+using Cooking.Converters.Implementation;
+using Cooking.Providers;
+using Cooking.Readers;
+using Cooking.Readers.Implementation;
+using Cooking.Writers;
+using Cooking.Writers.Implementation;
 
-namespace Recipe.DependencyResolver
+namespace Cooking.DependencyResolver
 {
     public static class DependendencyResolver
     {
@@ -20,6 +22,8 @@ namespace Recipe.DependencyResolver
             serviceCollection.AddScoped<ICategoryNameToDataTableConverter, CategoryNameToDataTableConverter>();
            
             serviceCollection.AddScoped<IWriter, Writer>();
+
+            serviceCollection.AddScoped<IDataReader, DataReader>();
 
             serviceCollection.RegisterTypes();
 

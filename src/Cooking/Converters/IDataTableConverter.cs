@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace Recipe.Converters
+namespace Cooking.Converters
 {
     public interface IDataTableConverter
     {

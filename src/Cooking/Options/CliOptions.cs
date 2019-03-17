@@ -1,10 +1,10 @@
 ﻿using CommandLine;
 
-namespace Recipe.Options
+namespace Cooking.Options
 {
     public class CliOptions
     {
-        [Option('f', "Functionality", Required = true, HelpText = @"Choose functionality between ""Recipes"", ""Recipes by Category"", ""Categories"", ""Recipes by ingredients"", ""Insert Ingredients""")]
+        [Option('f', "Functionality", Required = true, HelpText = @"Choose functionality between ""Recipes"", ""Recipes by Category"", ""Categories"", ""Recipes by ingredients"", ""Insert Ingredients"", ""Insert Recipes""")]
         public string Functionality { get; set; }
 
         [Option('n', "Name", HelpText = "Recipe name")]
@@ -15,5 +15,8 @@ namespace Recipe.Options
 
         [Option('i', "Ingredients", HelpText = "Ingredients")]
         public string Ingredients { get; set; }
+
+        [Option('p', "Path", HelpText = "Path for json file")]
+        public string Path { get; set; }
     }
 }

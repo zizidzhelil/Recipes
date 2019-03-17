@@ -5,6 +5,6 @@ namespace Infrastructure.Commands
 {
     public interface IInsertIngredientsCommand
     {
-        Task Execute(List<string> ingredients);
+        Task ExecuteAsync(List<string> ingredients);
     }
 }

@@ -6,6 +6,11 @@ namespace Infrastructure.Models
 {
     public class RecipeModel
     {
+        public RecipeModel()
+        {
+
+        }
+
         public RecipeModel(Recipe recipe)
         {
             Name = recipe.Name;
@@ -16,9 +21,9 @@ namespace Infrastructure.Models
             Calories = recipe.Calories;
             Ingredients = recipe.RecipeIngredients
                 .Select(r => new IngredientModel(
-                    r.Ingredient.Name, 
-                    r.Measurement.Name, 
-                    r.Amount.ToString()))
+                    r.Ingredient.Name,
+                    r.Measurement.Name,
+                    r.Amount))
                 .ToList();
 
         }
@@ -26,6 +31,8 @@ namespace Infrastructure.Models
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public string Category { get; set; }
 
         public string Instructions { get; set; }
 
@@ -36,5 +43,30 @@ namespace Infrastructure.Models
         public int Calories { get; set; }
 
         public List<IngredientModel> Ingredients { get; set; }
+
+        public Recipe ToRecipe(
+            Dictionary<string, int> categories,
+            Dictionary<string, int> ingredients,
+            Dictionary<string, int> measurements)
+        {
+            var recipe = new Recipe
+            {
+                Name = Name,
+                Description = Description,
+                Instructions = Instructions,
+                PreparationTime = PreparationTime,
+                NumberOfServings = NumberOfServings,
+                CategoryId = categories[Category.ToLower()],
+                Calories = Calories,
+                RecipeIngredients = Ingredients.Select(i => new RecipeIngredient()
+                {
+                    Amount = i.Amount,
+                    IngredientId = ingredients[i.Name.ToLower()],
+                    MeasurementId = measurements[i.Measurement.ToLower()]
+                }).ToList()
+            };
+
+            return recipe;
+        }
     }
 }

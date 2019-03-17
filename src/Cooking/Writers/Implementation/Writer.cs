@@ -2,7 +2,7 @@
 using System.Data;
 using System.Text;
 
-namespace Recipe.Writers.Implementation
+namespace Cooking.Writers.Implementation
 {
     public class Writer : IWriter
     {

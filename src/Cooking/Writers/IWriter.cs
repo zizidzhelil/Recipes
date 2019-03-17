@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Recipe.Writers
+namespace Cooking.Writers
 {
     public interface IWriter
     {

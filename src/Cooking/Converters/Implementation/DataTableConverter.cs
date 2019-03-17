@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Recipe.Converters.Implementation
+namespace Cooking.Converters.Implementation
 {
     public class DataTableConverter : IDataTableConverter
     {

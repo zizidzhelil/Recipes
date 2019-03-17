@@ -1,16 +1,19 @@
 ﻿using CommandLine;
 using ConsoleTableExt;
+using Cooking.Converters;
+using Cooking.DependencyResolver;
+using Cooking.Options;
+using Cooking.Readers;
+using Cooking.Writers;
+using Infrastructure.Models;
 using Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Recipe.Converters;
-using Recipe.DependencyResolver;
-using Recipe.Options;
-using Recipe.Writers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace Recipe
+namespace Cooking
 {
     class Program
     {
@@ -98,8 +101,17 @@ namespace Recipe
                     }
                     else if (o.Functionality == "Insert Ingredients")
                     {
-                        var recipeService = serviceProvider.GetService<IIngredientService>();
-                        recipeService.InsertIngredients(o.Ingredients.Split(", ", StringSplitOptions.None).ToList()).GetAwaiter().GetResult();
+                        var ingredientService = serviceProvider.GetService<IIngredientService>();
+                        ingredientService.InsertIngredients(o.Ingredients.Split(", ", StringSplitOptions.None).ToList()).GetAwaiter().GetResult();
+                    }
+                    else if (o.Functionality == "Insert Recipes")
+                    {
+                        var recipeService = serviceProvider.GetService<IRecipeService>();
+
+                        IDataReader reader = serviceProvider.GetService<IDataReader>();
+                        List<RecipeModel> recipes = reader.Read(o.Path);
+
+                        recipeService.InsertRecipesAsync(recipes).GetAwaiter().GetResult();
                     }
                 });
         }
